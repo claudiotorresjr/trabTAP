@@ -1,0 +1,59 @@
+TRABALHO DE CI062 – TÉCNICAS ALTERNATIVAS DE PROGRAMAÇÃO
+O trabalho está dividido em três partes:
+
+1) Implementar um modelo de classes orientado à objetos de um aplicativo de comunicação simplificado (ex.: WhatsApp).
+
+2) Implementar o comportamento de um grupo de WhatsApp.
+
+3) Simular o funcionamento, sendo que a especificação deverá usar padrões de projeto: FactoryMethod, Observer e Command, conforme definições abaixo.
+
+Seguir a especificação detalhada abaixo.
+
+1) Estrutura dos grupos e usuários
+
+Os usuários devem possuir no mínimo nome, número de telefone, status e foto.
+
+Os usuários podem ser Administradores ou usuários comuns do grupo.
+
+O grupo deve possuir usuários e descrição. Os grupos possuem as mensagens, que podem ser mensagens textuais, fotos, videos ou áudio.
+
+Os grupos, usuários e mensagens deverão ser instanciados usando o padrão FactoryMethod
+
+2) Comportamento
+
+Os grupos devem permitir a participação de várias pessoas (também chamados de usuários). Um usuário pode participar de mais de um grupo. Um usuário administrador poderá incluir as pessoas em um grupo.
+
+Os grupos recebem os diferentes tipos de mensagens. Cada usuário terá sua própria visão das mensagens de um grupo. Quando um usuário envia uma mensagem, todos os usuários participantes do grupo devem receber a mensagem. Quando um usuário recebe uma mensagem, todos os usuários receberão um aviso de que a mensagem foi visualizada.
+
+Uma mensagem, após ser enviada, pode ser cancelada. Ao cancelar o envio, a mensagem é retirada do grupo, porém apenas para os usuários que não haviam visualizado a mesma.
+
+O comportamento do envio e recebimento de mensagens deverá ser implementado usando os padrões de projeto Observer e Command. A escolha dos observadores, sujeitos e comandos para resolver este problema faz parte da avaliação do trabalho.
+
+3) Simulação
+
+O programa fará uma simulação de envio de mensagens entre integrantes dos grupos. Criar uma classe Programa que :
+
+– Conhenha 4 pessoas (p1, p2, p3 e p4) e 3 grupos (g1, g2 e g3). As descrições das pessoas e dos grupos podem ser escolhidas livremente.
+
+Simular as ações abaixo. Por simulação, entende-se a chamada dos métodos com as ações respectivas. Não deve ser feito interface para entrada de dados.
+– p1 cria os grupos g1 e g2;
+– p3 cria o grupo g3;
+
+– p1 inclui p2, p3 e p4 no grupo g1;
+– p1 inclui p2 e p3 no grupo g2;
+– p2 inclui p3 no grupo g2;
+– p3 inclui p4 no grupo g3;
+
+– p2 envia mensagem para g1;
+(todos visualizam)
+– p1 envia mensagem para g1;
+(todos visualizam)
+– p2 envia mensagem para g2;
+(todos menos p3 visualizam)
+– p3 envia mensagem para g3;
+(todos menos p2 visualizam)
+– p3 envia mensagem para g2;
+(p2 e p1 visualizam)
+– p3 cancela mensagem para g3)
+– p3 envia mensagem para g3;
+(todos visualizam)
