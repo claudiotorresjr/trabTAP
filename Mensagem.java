@@ -10,7 +10,7 @@ public class Mensagem{
 	private String conteudo;							//guarda o conteudo da mensagem
 	private ArrayList <Usuario> vistoPor;               // Lista de usuarios que visualizaram
 	private String envio;   							//mostra no grupo a frase adequada para o que foi enviado
-	private boolean apagada;
+	private boolean apagada;							//sinaliza se a mensagem foi apagada ou nao
 
 	// Seters
 	public void setTipo(String novoTipo){

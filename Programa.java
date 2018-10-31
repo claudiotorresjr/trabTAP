@@ -2,21 +2,22 @@ import java.util.*;
 
 class Programa{
 	public static void main(String args[]){
-		// Inicializa os usuários.
+		// Inicializa os grupo.
 		Grupo g1 = null; 
 		Grupo g2 = null; 
 		Grupo g3 = null; 
+		//cria a fabrica de usuarios
 		UsuarioFactory usrfac = new UsuarioFactory();
 
 		//Criação de 4 usuários
-		Usuario p1 = usrfac.criaUsuario("p1", "24011996", "Só quero que o semestre acabe :(", "semFoto");
-		Usuario p2 = usrfac.criaUsuario("p2", "22012006", "To na área galera", "semFoto");
-		Usuario p3 = usrfac.criaUsuario("p3", "28022018", "Não tenho nem 1 ano de idade e já tenho whats", "semFoto");
-		Usuario p4 = usrfac.criaUsuario("p4", "11042014", "Que que eu to fazendo aqui? Sei nem ler", "semFoto");
+		Usuario p1 = usrfac.criaUsuario("Cláudio", "24011996", "Só quero que o semestre acabe :(", "semFoto");
+		Usuario p2 = usrfac.criaUsuario("Gabriel", "22012006", "To na área galera", "semFoto");
+		Usuario p3 = usrfac.criaUsuario("Arthur", "28022018", "Não tenho nem 1 ano de idade e já tenho whats", "semFoto");
+		Usuario p4 = usrfac.criaUsuario("João", "11042014", "Que que eu to fazendo aqui? Sei nem ler", "semFoto");
 
 		//criando 3 grupos e atribuindo os administradores respectivos		
 		// p1 cria os grupos g1 e g2
-		g1 = p1.criaGrupo(g1, "Breezers", "turma 7 IBM");
+		g1 = p1.criaGrupo(g1, "IBM-2017", "turma 7 IBM");
 		g2 = p1.criaGrupo(g2, "Reides UFPR politecnico", "reides para pokemon go do politecnico");
 		
 		// p3 cria os grupos g3
@@ -31,9 +32,6 @@ class Programa{
 		p1.adicionaMembro(p2, g2);
 		p1.adicionaMembro(p3, g2);
 
-		// p2 inclui p3 no grupo g2
-		p2.adicionaMembro(p3, g2);
-
 		//p3 inclui p4 no grupo g3
 		p3.adicionaMembro(p4, g3);
 
@@ -46,32 +44,24 @@ class Programa{
 		//(todos visualizam)
 		p1.enviarMensagem("foto", "o zé caido no chao", g1, null);
 
-		p3.enviarMensagem("texto", "kkkk seu boboca", g1, null);
-
-		p1.enviarMensagem("texto", "p3 vacilaum", g1, p3);
-
-		p1.apagarMensagem(g1.getMensagem(g1.getNumeroMensagens() - 1));
-
-		p2.enviarMensagem("foto", "eu vi hein", g1, null);
-
-
+		
 
 		//p2 envia mensagem para g2;
 		//(todos menos p3 visualizam)
-		//p2.enviarMensagem("audio", "Ta chovendo ai? Aqui ta chovendo", g2, p3);
+		p2.enviarMensagem("audio", "Ta chovendo ai? Se tiver nao tem como participar", g2, p3);
 
 		//p3 envia mensagem para g3;
-		//(todos menos p2 visualizam)
-		//p3.enviarMensagem("texto", "Me perdi de tanto grupo :o", g3, p2);
+		p3.enviarMensagem("texto", "Me perdi de tanto grupo :o", g3, null);
 
 		//p3 envia mensagem para g2;
 		//(p2 e p1 visualizam)
-		//p3.enviarMensagem("texto", "Meu deus tio! cê manda isso todo dia", g2, null);
+		p3.enviarMensagem("texto", "Parou de chover. Mas qualquer coisa temos guarda chuva :)", g2, null);
 
 		//p3 cancela mensagem para g3
+		p3.apagarMensagem(g3.getMensagem(g3.getNumeroMensagens() - 1));
 
 		//p3 envia mensagem para g3;
 		//(todos visualizam)
-		//p3.enviarMensagem("audio", "Pq um grupo só eu e vc? ", g3, null);
+		p3.enviarMensagem("audio", "Pq um grupo só eu e vc? ", g3, null);
 	}
 }

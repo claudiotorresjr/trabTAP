@@ -73,6 +73,7 @@ public class Usuario implements Observador, MensagemCommand{
 	// Implementa o metodo de MensagemCommand para:
 	// enviar mensagem
 	public void enviarMensagem(String tipo, String conteudo, Grupo grupo, Usuario naoViu){
+		//verifica se o usuario que quer enviar a mensagem se encontra no grupo
 		if(this.getIndiceGrupo(grupo) < 0){
 			System.out.println(" Mensagem não enviada pois " + this.getNome() + " não faz parte do grupo '" + grupo.getNome() + "'");
 			System.out.println("-------------------------------------------------------------");
@@ -89,11 +90,15 @@ public class Usuario implements Observador, MensagemCommand{
 
 	// apagar a mensagem
 	public void apagarMensagem(Mensagem mensagem){
+		//verifica se o usuario que quer apagar a mensagem se encontra no grupo
 		if(this.getIndiceGrupo(mensagem.getGrupo()) < 0){
 			System.out.println(" Mensagem não apagada pois " + this.getNome() + " não faz parte do grupo '" + mensagem.getGrupo().getNome() + "'");
 			System.out.println("-------------------------------------------------------------");
 		}else{
-			System.out.println("Apagando mensagem...");
+			System.out.println();
+			System.out.println();
+			System.out.println("-------------------------------------------------------------");
+			System.out.println(this.getNome() + " esta apagando sua mensagem do grupo " + mensagem.getGrupo().getNome() + "...");
 			System.out.println("-------------------------------------------------------------");
 			mensagem.setApagada(true);
 			mensagem.getGrupo().atualizaObservadores(mensagem, null);
@@ -106,23 +111,26 @@ public class Usuario implements Observador, MensagemCommand{
 		int i, j;
 		System.out.println("\n\n=========== Grupo '" + novaMensagem.getGrupo().getNome() + "' de " + this.getNome() + "  ===========");
 
+		//laço para cada usuario poder ver ou nao a mensagem caso seja apagada
 		for(i = 0; i < mensagens.size(); ++i){
 
+			//verifica se o usuario viu a mensagem
 			for(j = 0; j < mensagens.get(i).getNumeroVistoPor(); ++j){
 				if(this == mensagens.get(i).getVistoPor(j)){
 					j = -1;
 					break;
 				}
 			}
-
+			//se nao viu e ela foi apagada, aparece "mensagem apagada"
 			if(mensagens.get(i).getApagada() && j != -1){
 				System.out.println("(mensagem apagada)");
+			//se viu, aparece a mensagem para o usuario mesmo tendo sido apagada
 			}else{
 				System.out.println(mensagens.get(i).getUsuario().getNome() + mensagens.get(i).getEnvio() + mensagens.get(i).getConteudo() + " ( " + mensagens.get(i).getHorarioMensagem() + " ) ");
 			}
 		}
 		System.out.println();
-
+		//mostra quem visualizou a ultima mensagem enviada
 		for(i = 0; i < novaMensagem.getNumeroVistoPor(); ++i){
 			if(novaMensagem.getVistoPor(i) != this && novaMensagem.getVistoPor(i) != novaMensagem.getUsuario()){
 				System.out.println("\t\t\t\t(visto por: " + novaMensagem.getVistoPor(i).getNome() + " )");

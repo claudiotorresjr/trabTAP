@@ -53,29 +53,19 @@ public class Grupo implements Observavel{
 		if(!novaMensagem.getApagada()){
 			this.setMensagens(novaMensagem);
 		}
-
+		//seta os usuarios que visualizaram a mensagem
 		for(int i = 0; i < this.getNumeroUsuarios(); ++i){
 			if(this.getMembro(i) != naoViu && !novaMensagem.getApagada()){
 				novaMensagem.setVistoPor(this.getMembro(i));
 			}
 		}
+		//manda a mensagem para a tela de cada usuario que a viu
 		for(int i = 0; i < observadores.size(); ++i){
 			if(this.getMembro(i) != naoViu){
 				observadores.get(i).atualiza(novaMensagem, this.mensagens);
 			}
 		}
 	}
-
-	//public void apagarMensagemGrupo(Mensagem mensagem){
-//
-//	//	for(int i = 0; i < observadores.size(); ++i){
-//	//		if(mensagem.getArrayVistoPor().contains(this.getMembro(i))){
-//	//			observadores.get(i).atualiza(mensagem, this.mensagens);
-//	//		}else{
-//	//			observadores.get(i).atualiza("(mensagem apagada)", this.mensagens);
-//	//		}
-//	//	}
-	//}
 
 	// Construtor
 	public Grupo(Usuario novoAdmin, String novoNome, String novoDescricao){

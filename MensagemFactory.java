@@ -3,7 +3,7 @@ import java.text.*;
 
 public class MensagemFactory{
 	public Mensagem criaMensagem(Usuario sender, String tipo, String conteudo, Grupo grupo){
-
+		//retorna o tipo de mensagem especifico para cada tipo
 		if(tipo.equals("texto")){
 			return new MensagemTexto(sender, tipo, conteudo, grupo);
 		}else if(tipo.equals("foto")){
