@@ -12,5 +12,6 @@ public class MensagemVideo extends Mensagem{
 		this.setHorarioMensagem();	    				//seta horario da mensagem
 		this.criaVistoPor();				            // Cria lista de observadores
 		this.setEnvio(" enviou um video: ");	    	//seta quem mandou da mensagem
+		this.setApagada(false);	   						
 	}
 }

@@ -72,20 +72,6 @@ public class Usuario implements Observador, MensagemCommand{
 	// Interfaces
 	// Implementa o metodo de MensagemCommand para:
 	// enviar mensagem
-	public void enviarMensagem(String tipo, String conteudo, Grupo grupo){
-		if(this.getIndiceGrupo(grupo) < 0){
-			System.out.println(" Mensagem não enviada pois " + this.getNome() + " não faz parte do grupo '" + grupo.getNome() + "'");
-			System.out.println("-------------------------------------------------------------");
-		}else{
-			MensagemFactory msgf = new MensagemFactory();
-			Mensagem mensagem = msgf.criaMensagem(this, tipo, conteudo, grupo);
-
-			System.out.println("\n-------------------------------------------------------------");
-			System.out.println(this.getNome() + " enviou uma mensagem de " + mensagem.getTipo() + " no grupo: '" + grupo.getNome() + "'");
-			System.out.println("-------------------------------------------------------------");
-			grupo.atualizaObservadores(mensagem);
-		}
-	}
 	public void enviarMensagem(String tipo, String conteudo, Grupo grupo, Usuario naoViu){
 		if(this.getIndiceGrupo(grupo) < 0){
 			System.out.println(" Mensagem não enviada pois " + this.getNome() + " não faz parte do grupo '" + grupo.getNome() + "'");
@@ -100,24 +86,44 @@ public class Usuario implements Observador, MensagemCommand{
 			grupo.atualizaObservadores(mensagem, naoViu);
 		}
 	}
-	// se visualizou
-	//public void naoVisualizouMensagem(Grupo grupo){
-	//	Mensagem mensagem = grupo.getMensagem(grupo.getNumeroMensagens() - 1);
-	//	mensagem.removeVistoPor(this);
-	//	grupo.atualizaObservadores(mensagem);
-	//}
+
+	// apagar a mensagem
+	public void apagarMensagem(Mensagem mensagem){
+		if(this.getIndiceGrupo(mensagem.getGrupo()) < 0){
+			System.out.println(" Mensagem não apagada pois " + this.getNome() + " não faz parte do grupo '" + mensagem.getGrupo().getNome() + "'");
+			System.out.println("-------------------------------------------------------------");
+		}else{
+			System.out.println("Apagando mensagem...");
+			System.out.println("-------------------------------------------------------------");
+			mensagem.setApagada(true);
+			mensagem.getGrupo().atualizaObservadores(mensagem, null);
+		}
+	}
+
 
 	// Imprime a atualização feita por algum objeto observavel
 	public void atualiza(Mensagem novaMensagem, ArrayList <Mensagem> mensagens){
-
+		int i, j;
 		System.out.println("\n\n=========== Grupo '" + novaMensagem.getGrupo().getNome() + "' de " + this.getNome() + "  ===========");
 
-		for(int i = 0; i < mensagens.size(); ++i){
-			System.out.println(mensagens.get(i).getUsuario().getNome() + mensagens.get(i).getEnvio() + mensagens.get(i).getConteudo() + " ( " + mensagens.get(i).getHorarioMensagem() + " ) ");
+		for(i = 0; i < mensagens.size(); ++i){
+
+			for(j = 0; j < mensagens.get(i).getNumeroVistoPor(); ++j){
+				if(this == mensagens.get(i).getVistoPor(j)){
+					j = -1;
+					break;
+				}
+			}
+
+			if(mensagens.get(i).getApagada() && j != -1){
+				System.out.println("(mensagem apagada)");
+			}else{
+				System.out.println(mensagens.get(i).getUsuario().getNome() + mensagens.get(i).getEnvio() + mensagens.get(i).getConteudo() + " ( " + mensagens.get(i).getHorarioMensagem() + " ) ");
+			}
 		}
 		System.out.println();
 
-		for(int i = 0; i < novaMensagem.getNumeroVistoPor(); ++i){
+		for(i = 0; i < novaMensagem.getNumeroVistoPor(); ++i){
 			if(novaMensagem.getVistoPor(i) != this && novaMensagem.getVistoPor(i) != novaMensagem.getUsuario()){
 				System.out.println("\t\t\t\t(visto por: " + novaMensagem.getVistoPor(i).getNome() + " )");
 			}

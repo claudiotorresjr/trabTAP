@@ -10,6 +10,7 @@ public class Mensagem{
 	private String conteudo;							//guarda o conteudo da mensagem
 	private ArrayList <Usuario> vistoPor;               // Lista de usuarios que visualizaram
 	private String envio;   							//mostra no grupo a frase adequada para o que foi enviado
+	private boolean apagada;
 
 	// Seters
 	public void setTipo(String novoTipo){
@@ -33,6 +34,9 @@ public class Mensagem{
 	public void setEnvio(String metodo){
 		envio = metodo;
 	}
+	public void setApagada(boolean apagada){
+		this.apagada = apagada;
+	}
 
 	// Geters.
 	public String getTipo(){
@@ -53,13 +57,18 @@ public class Mensagem{
 	public int getNumeroVistoPor(){
 		return (vistoPor.size());
 	}
+	public ArrayList <Usuario> getArrayVistoPor(){
+		return (vistoPor);
+	}
 	public Usuario getVistoPor(int indice){
 		return (vistoPor.get(indice));
 	}
 	public String getEnvio(){
 		return (envio);
 	}
-
+	public boolean getApagada(){
+		return (apagada);
+	}
 	public void removeVistoPor(Usuario naoViu){
 		vistoPor.remove(naoViu);
 	}

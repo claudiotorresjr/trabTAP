@@ -49,21 +49,13 @@ public class Grupo implements Observavel{
 
 	//interfaces
 	//manda a atualização para todos os observadores do grupo
-	public void atualizaObservadores(Mensagem novaMensagem){
-		this.setMensagens(novaMensagem);
-
-		for(int i = 0; i < this.getNumeroUsuarios(); ++i){
-			novaMensagem.setVistoPor(this.getMembro(i));
-		}
-		for(int i = 0; i < observadores.size(); ++i){
-			observadores.get(i).atualiza(novaMensagem, this.mensagens);
-		}
-	}
 	public void atualizaObservadores(Mensagem novaMensagem, Usuario naoViu){
-		this.setMensagens(novaMensagem);
+		if(!novaMensagem.getApagada()){
+			this.setMensagens(novaMensagem);
+		}
 
 		for(int i = 0; i < this.getNumeroUsuarios(); ++i){
-			if(this.getMembro(i) != naoViu){
+			if(this.getMembro(i) != naoViu && !novaMensagem.getApagada()){
 				novaMensagem.setVistoPor(this.getMembro(i));
 			}
 		}
@@ -73,6 +65,17 @@ public class Grupo implements Observavel{
 			}
 		}
 	}
+
+	//public void apagarMensagemGrupo(Mensagem mensagem){
+//
+//	//	for(int i = 0; i < observadores.size(); ++i){
+//	//		if(mensagem.getArrayVistoPor().contains(this.getMembro(i))){
+//	//			observadores.get(i).atualiza(mensagem, this.mensagens);
+//	//		}else{
+//	//			observadores.get(i).atualiza("(mensagem apagada)", this.mensagens);
+//	//		}
+//	//	}
+	//}
 
 	// Construtor
 	public Grupo(Usuario novoAdmin, String novoNome, String novoDescricao){

@@ -12,5 +12,6 @@ public class MensagemTexto extends Mensagem{
 		this.setHorarioMensagem();	    				//seta horario da mensagem
 		this.criaVistoPor();				            // Cria lista de observadores
 		this.setEnvio(" disse: ");	    		        //seta quem mandou da mensagem
+		this.setApagada(false);	   						
 	}
 }

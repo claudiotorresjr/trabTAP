@@ -39,30 +39,39 @@ class Programa{
 
 		//p2 envia mensagem para g1;
 		//(todos visualizam)
-		p2.enviarMensagem("video", "zé empinando a motoca", g1);
+		p2.enviarMensagem("video", "zé empinando a motoca", g1, null);
 		
 
 		//p1 envia mensagem para g1;
 		//(todos visualizam)
-		p1.enviarMensagem("foto", "o zé caido no chao", g1);
+		p1.enviarMensagem("foto", "o zé caido no chao", g1, null);
+
+		p3.enviarMensagem("texto", "kkkk seu boboca", g1, null);
+
+		p1.enviarMensagem("texto", "p3 vacilaum", g1, p3);
+
+		p1.apagarMensagem(g1.getMensagem(g1.getNumeroMensagens() - 1));
+
+		p2.enviarMensagem("foto", "eu vi hein", g1, null);
+
 
 
 		//p2 envia mensagem para g2;
 		//(todos menos p3 visualizam)
-		p2.enviarMensagem("audio", "Ta chovendo ai? Aqui ta chovendo", g2, p3);
+		//p2.enviarMensagem("audio", "Ta chovendo ai? Aqui ta chovendo", g2, p3);
 
 		//p3 envia mensagem para g3;
 		//(todos menos p2 visualizam)
-		p3.enviarMensagem("texto", "Me perdi de tanto grupo :o", g3, p2);
+		//p3.enviarMensagem("texto", "Me perdi de tanto grupo :o", g3, p2);
 
 		//p3 envia mensagem para g2;
 		//(p2 e p1 visualizam)
-		p3.enviarMensagem("texto", "Meu deus tio! cê manda isso todo dia", g2);
+		//p3.enviarMensagem("texto", "Meu deus tio! cê manda isso todo dia", g2, null);
 
 		//p3 cancela mensagem para g3
 
 		//p3 envia mensagem para g3;
 		//(todos visualizam)
-		p3.enviarMensagem("audio", "Pq um grupo só eu e vc? ", g3);
+		//p3.enviarMensagem("audio", "Pq um grupo só eu e vc? ", g3, null);
 	}
 }
